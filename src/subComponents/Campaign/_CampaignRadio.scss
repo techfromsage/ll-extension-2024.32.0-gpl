@@ -1,0 +1,35 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/spacing";
+
+.radio__wrapper--campaign {
+  .radio__text {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid colors.$lightGray;
+    border-radius: spacing.$border-radius;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  input {
+    display: none;
+
+    &:hover {
+      ~ .radio__text {
+        box-shadow: 0 5px 10px rgba(20, 21, 22, 15%);
+      }
+    }
+
+    &:checked {
+      ~ .radio__text {
+        border-color: var(--primary-color);
+        background-color: var(--primary-color);
+        box-shadow: 0 5px 10px rgba(20, 21, 22, 15%);
+        color: var(--primary-contrast-color);
+      }
+    }
+  }
+}

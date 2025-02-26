@@ -1,0 +1,108 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+
+.alert-wrapper {
+  position: fixed;
+  z-index: 9999999;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.alert {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  border: 1px solid colors.$darkGray;
+  border-radius: spacing.$border-radius;
+  background: colors.$lightGray;
+  text-align: center;
+
+  &--success {
+    border-color: colors.$success;
+    background: colors.$successLight;
+    color: colors.$successDark;
+  }
+
+  &--warning {
+    border-color: colors.$warningDark;
+    background: colors.$warning;
+    color: colors.$darkGray;
+  }
+
+  &--info {
+    border-color: colors.$lightGray;
+    background: colors.$infoLight;
+    color: colors.$midGray;
+  }
+
+  &--error {
+    border-color: colors.$error;
+    background: colors.$errorLight;
+    color: colors.$errorDark;
+  }
+
+  &--text-left {
+    justify-content: left;
+    text-align: left;
+  }
+
+  &--wide {
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .alert-wrapper {
+          bottom: sizes.calculate-size(50px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .alert {
+          $padding-vertical: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          $padding-horizontal: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+
+          padding: $padding-vertical $padding-horizontal $padding-vertical $padding-vertical;
+          margin-top: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+          &--info,
+          &--success {
+            font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+            line-height: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+
+            svg {
+              width: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+              height: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+
+              &:not(.button-icon) {
+                margin-right: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+              }
+            }
+          }
+
+          &--wide {
+            width: sizes.calculate-size(284px, $screen-multiplier, $custom-multiplier);
+
+            $padding-vertical: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+            $padding-horizontal: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+            padding: $padding-vertical $padding-horizontal $padding-vertical $padding-vertical;
+            font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            line-height: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@keyframes slide-down {
+  from {
+    top: -50%;
+  }
+
+  to {
+    top: 16px;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    top: 16px;
+  }
+
+  to {
+    top: -75%;
+  }
+}
+
+@keyframes slide-right {
+  from {
+    right: -50%;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    right: 0;
+  }
+
+  to {
+    right: -50%;
+  }
+}
+
+.dissolve {
+  opacity: 0;
+  transition: visibility 0s 0s, opacity 0.4s cubic-bezier(0, 0, 0, 0.1);
+}
+
+.animate--slide-down {
+  animation-name: slide-down;
+  animation-duration: 0.5s;
+  transition-timing-function: cubic-bezier(1, 0, 0.95, 0.07);
+}
+
+.animate--slide-up {
+  animation-name: slide-up;
+  animation-duration: 0.5s;
+  transition-timing-function: cubic-bezier(1, 0, 0.95, 0.07);
+}
+
+.animate--slide-right {
+  animation-name: slide-right;
+  animation-duration: 0.5s;
+  transition-timing-function: cubic-bezier(1, 0, 0.95, 0.07);
+}
+
+.animate--slide-left {
+  animation-name: slide-left;
+  animation-duration: 0.5s;
+  transition-timing-function: cubic-bezier(1, 0, 0.95, 0.07);
+}

@@ -1,0 +1,71 @@
+@use "../../assets/scss/index";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.color-palette-wrapper {
+  width: fit-content;
+  user-select: none;
+}
+
+.color-palette {
+  display: flex;
+  justify-content: center;
+
+  &__colors {
+    display: flex;
+
+    li {
+      display: flex;
+      align-items: center;
+    }
+
+    &__color {
+      border: 0.5px solid colors.$lightMidGray;
+      border-radius: 50%;
+      cursor: pointer;
+      outline: 1px solid transparent;
+
+      &:hover {
+        border: 1px solid colors.$lightMidGray;
+        outline: 1px solid colors.$lightMidGray;
+      }
+
+      &:focus-visible {
+        border: 1px solid colors.$lightCobalt;
+        outline: 1px solid colors.$lightCobalt;
+      }
+    }
+
+    &__divider {
+      width: 1px;
+      border-right: 0.5px solid colors.$darkWhite;
+    }
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .color-palette-wrapper {
+          max-width: sizes.calculate-size(237px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .color-palette {
+          &__colors {
+            gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+            &__color {
+              width: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+              height: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+            }
+
+            &__divider {
+              margin-left: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+        }
+      }
+    }
+  }
+}

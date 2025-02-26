@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": false,
+    "jsx": "react",
+    "baseUrl": "./",
+    "outDir": "./.tscGenerated",
+    "paths": {
+      "@bootstrap/*": ["bootstrap/*"],
+      "@/*": ["src/*"]
+    },
+    "types": [
+      "./node_modules/network-information-types",
+      "chrome",
+      "firefox-webext-browser",
+      "md5",
+      "node",
+      "react",
+      "react-dom",
+
+    ]
+  },
+  "include": ["src", "bootstrap", "@types/index.d.ts", "@types/global.d.ts", "StyleGuide"],
+  "exclude": ["build", "build-browser", "node_modules"]
+}

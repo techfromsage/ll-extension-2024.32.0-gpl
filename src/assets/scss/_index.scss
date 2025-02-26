@@ -1,0 +1,82 @@
+@use "../../assets/scss/reset";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/typography";
+@use "../../assets/scss/animation";
+@use "../../assets/scss/spacing";
+
+$font-family-code: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+
+@mixin base {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+body {
+  @include base;
+}
+
+code {
+  font-family: $font-family-code;
+}
+
+p {
+  margin-bottom: spacing.$space-small;
+}
+
+.hidden-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.d--block {
+  display: block;
+}
+
+.mh--auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb--none {
+  margin-bottom: 0 !important;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s;
+}
+
+.fade-out {
+  animation: fadeOut 0.8s;
+}

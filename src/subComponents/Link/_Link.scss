@@ -1,0 +1,65 @@
+@use "../../assets/scss/spacing";
+@use "../../assets/scss/sizes";
+@use "../_mixins/ButtonMixins";
+@use "../../assets/scss/colors";
+
+.link {
+  color: colors.$lightCobalt !important;
+  font-weight: 700;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: colors.$purple;
+  }
+}
+
+.link--block {
+  display: block;
+}
+
+.link--as-button {
+  display: block;
+  border-style: none;
+  border-radius: spacing.$border-radius;
+  background-color: var(--primary-color);
+  color: var(--primary-contrast-color) !important;
+  cursor: pointer;
+  font-weight: 700 !important;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--primary-dark-color);
+  }
+}
+
+@each $screen,
+  $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+
+      .#{$size-name} {
+        .link {
+          line-height: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .link--small {
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .link--as-button {
+          width: sizes.calculate-size(300px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(44px, $screen-multiplier, $custom-multiplier);
+          margin-top: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(44px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

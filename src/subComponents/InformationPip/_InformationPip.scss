@@ -1,0 +1,37 @@
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/spacing";
+
+.information-pip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: spacing.$border-radius;
+  margin: 4px;
+  background-color: colors.$midWhite;
+  color: colors.$black;
+  gap: 4px;
+  text-transform: uppercase;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .information-pip {
+          padding:
+            sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier)
+            sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@use "../../assets/scss/sizes";
+
+.logo {
+  display: block;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .logo {
+          max-width: sizes.calculate-size(240px, $screen-multiplier, $custom-multiplier);
+          max-height: sizes.calculate-size(70px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .logo--popup {
+          margin-right: auto;
+          margin-bottom: sizes.calculate-size(28px, $screen-multiplier, $custom-multiplier);
+          margin-left: auto;
+        }
+
+        .logo--sidetray {
+          $mt: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+          $mb: sizes.calculate-size(28px, $screen-multiplier, $custom-multiplier);
+
+          margin: $mt auto $mb auto;
+        }
+
+        .logo--modal,
+        .logo--citation-modal {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}

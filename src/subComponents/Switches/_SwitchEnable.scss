@@ -1,0 +1,53 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+
+@mixin switch-enable($screen-multiplier, $custom-variance) {
+  display: block;
+  width: sizes.calculate-size(77.5px, $screen-multiplier, $custom-variance);
+  height: sizes.calculate-size(16.25px, $screen-multiplier, $custom-variance);
+  align-self: flex-end;
+  border: none;
+  border-radius: spacing.$border-radius;
+  background-color: colors.$midWhite;
+  color: colors.$midGray;
+  cursor: pointer;
+  font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-variance);
+  font-weight: 510;
+  letter-spacing: 0;
+  line-height: sizes.calculate-size(14px, $screen-multiplier, $custom-variance);
+  text-align: center;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+
+      .#{$size-name} {
+        .switch-enable {
+          @include switch-enable($screen-multiplier, $custom-multiplier);
+        }
+
+        .switch-enabled {
+          @include switch-enable($screen-multiplier, $custom-multiplier);
+
+          background-color: var(--primary-color);
+          color: var(--primary-contrast-color);
+        }
+
+        .switch-enable-text {
+          position: relative;
+          top: sizes.calculate-size(1px, $screen-multiplier, $custom-multiplier);
+          right: sizes.calculate-size(3px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .switch-enable input,
+        .switch-enabled input {
+          width: 0;
+          height: 0;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+@use "../../../../assets/scss/index";
+@use "../../../../assets/scss/colors";
+@use "../../../../assets/scss/sizes";
+
+.container-sciwheel-onboarding {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.container-sciwheel-onboarding__layout {
+  display: flex;
+  overflow: hidden auto;
+  flex-direction: column;
+  box-shadow:
+    0 515px 145px 0 rgba(0, 0, 0, 0%),
+    0 329px 132px 0 rgba(0, 0, 0, 1%),
+    0 185px 111px 0 rgba(0, 0, 0, 5%),
+    0 83px 83px 0 rgba(0, 0, 0, 10%),
+    0 21px 45px 0 rgba(0, 0, 0, 10%);
+}
+
+.container-sciwheel-onboarding__container {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-sciwheel-onboarding__frame {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container-sciwheel-onboarding__link {
+  position: absolute;
+  border: none;
+  background: none;
+  color: colors.$midGray;
+  cursor: pointer;
+}
+
+.container-sciwheel-onboarding__heading-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.container-sciwheel-onboarding__heading {
+  display: flex;
+  text-align: center;
+}
+
+.container-sciwheel-onboarding__image {
+  background: colors.$midGray;
+}
+
+.container-sciwheel-onboarding__action-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .button-maybe-later {
+    border: none;
+    background: none;
+    color: colors.$midGray;
+    cursor: pointer;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .container-sciwheel-onboarding__layout {
+          width: sizes.calculate-size(440px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(750px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .container-sciwheel-onboarding__container {
+          padding: 
+          sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier)
+          sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier)
+          sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .container-sciwheel-onboarding__frame {
+          margin-top: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .container-sciwheel-onboarding__link {
+          top: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          left: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          font-weight: sizes.calculate-size(700, $screen-multiplier, $custom-multiplier);
+        }
+
+        .container-sciwheel-onboarding__heading-wrapper {
+          svg {
+              width: sizes.calculate-size(26px, $screen-multiplier, $custom-multiplier);
+              height: sizes.calculate-size(26px, $screen-multiplier, $custom-multiplier);
+              margin-top: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+        
+        .container-sciwheel-onboarding__heading {
+          margin-right: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .container-sciwheel-onboarding__image {
+          width: sizes.calculate-size(400px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(320px, $screen-multiplier, $custom-multiplier);
+          margin-top: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .container-sciwheel-onboarding__action-wrapper {
+          margin-bottom: sizes.calculate-size(32px, $screen-multiplier, $custom-multiplier);
+
+          .button-primary {
+            margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+
+          .button-maybe-later {
+            font-size: sizes.calculate-size(13px, $screen-multiplier, $custom-multiplier);
+            font-weight: sizes.calculate-size(600, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

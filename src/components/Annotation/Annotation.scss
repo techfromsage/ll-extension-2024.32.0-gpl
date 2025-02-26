@@ -1,0 +1,57 @@
+@use "../../assets/scss/index";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.annotation-wrapper {
+  width: fit-content;
+}
+
+.annotation {
+  display: flex;
+  flex-direction: column;
+
+  &__note {
+    color: colors.$black;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__text {
+      color: colors.$midGray;
+      font-style: italic;
+    }
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .annotation-wrapper {
+          min-width: sizes.calculate-size(256px, $screen-multiplier, $custom-multiplier);
+          max-width: sizes.calculate-size(368px, $screen-multiplier, $custom-multiplier);
+          min-height: sizes.calculate-size(32px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .annotation {
+          gap: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+
+          &__note {
+            font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__meta {
+            &__text {
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+              line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@use "../../assets/scss/colors";
+
+.tooltip-trigger {
+  all: unset;
+  padding: 0 2px;
+  border-radius: 2px;
+  color: colors.$white;
+  cursor: pointer;
+  font-family: revert;
+  outline: 2px solid transparent;
+
+  &:focus {
+    outline: 2px solid colors.$black;
+  }
+}

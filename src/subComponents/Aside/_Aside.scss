@@ -1,0 +1,118 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+
+@keyframes aside-slide {
+  from {
+    margin-top: -50%;
+  }
+
+  to {
+    margin-top: 10px;
+  }
+}
+
+@keyframes aside-slide-close {
+  from {
+    margin-top: 10px;
+  }
+
+  to {
+    margin-top: -100%;
+  }
+}
+
+@mixin open-close-timing {
+  animation-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@mixin aside-expand($screen-multiplier, $custom-variance) {
+  padding-left: 0;
+  border: none;
+  border-radius: spacing.$border-radius;
+  margin: 0 0 sizes.calculate-size(12px, $screen-multiplier, $custom-variance);
+  background: none;
+  cursor: pointer;
+  font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-variance);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: sizes.calculate-size(14px, $screen-multiplier, $custom-variance);
+  text-align: left;
+}
+
+.aside-wrapper {
+  overflow: hidden;
+}
+
+.aside-closed {
+  @include open-close-timing;
+
+  margin-top: -100%;
+  animation-name: aside-slide-close;
+}
+
+.aside-open {
+  @include open-close-timing;
+
+  margin-top: 10px;
+  animation-name: aside-slide;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name,
+      $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .aside {
+          padding: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          background-color: white;
+        }
+
+        .aside-heading {
+          margin-bottom: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+          color: colors.$black;
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          font-weight: 700;
+          letter-spacing: 0;
+          line-height: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          text-align: left;
+        }
+
+        .aside-wrapper {
+          margin: 0;
+        }
+
+        .aside-expand {
+          @include aside-expand($screen-multiplier, $custom-multiplier);
+
+          display: block;
+          color: colors.$black;
+        }
+
+        .aside-expand_inline {
+          @include aside-expand($screen-multiplier, $custom-multiplier);
+
+          position: absolute;
+          display: inline;
+          margin-top: -1px;
+          color: colors.$midGray;
+          white-space: normal;
+        }
+
+        .aside_down_icon {
+          position: relative;
+          top: 0;
+          padding-right: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+          padding-left: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .aside-expand--closed {
+          .aside_down_icon {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@use "CampaignRadio";
+@use "../../assets/scss/colors";
+
+.campaign__answers__key {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    color: colors.$black;
+    font-size: 9px;
+    font-weight: 700;
+  }
+}
+
+.campaign__answers {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

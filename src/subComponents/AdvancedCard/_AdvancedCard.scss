@@ -1,0 +1,95 @@
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+@use "../../assets/scss/colors";
+
+.advanced-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: spacing.$border-radius;
+  background-color: white;
+
+  &__status,
+  &__main {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__status {
+    align-items: center;
+  }
+
+  &__heading {
+    color: colors.$black;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-align: left;
+  }
+
+  &__logo {
+    display: block;
+  }
+
+  &__body {
+    font-weight: 400;
+    letter-spacing: 0;
+    text-align: left;
+  }
+}
+
+.advanced-card--sciwheel {
+  .advanced-card__body {
+    p {
+      color: colors.$midGray;
+
+      span {
+        display: block;
+        margin-top: 3px;
+        color: colors.$black;
+      }
+    }
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+
+      .#{$size-name} {
+        .advanced-card {
+          padding: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          margin-right: sizes.calculate-size(-10px, $screen-multiplier, $custom-multiplier);
+          margin-left: sizes.calculate-size(-10px, $screen-multiplier, $custom-multiplier);
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+          &:not(:last-child) {
+            margin-bottom: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__status,
+          &__main {
+            gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__logo {
+            width: sizes.calculate-size(101px, $screen-multiplier, $custom-multiplier);
+            height: sizes.calculate-size(25px, $screen-multiplier, $custom-multiplier);
+            margin-top: sizes.calculate-size(12.75px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .integration__heading {
+          margin-bottom: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .integration__body {
+          margin-right: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

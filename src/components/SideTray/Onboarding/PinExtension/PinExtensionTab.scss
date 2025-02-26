@@ -1,0 +1,99 @@
+@use "../../../../assets/scss/index";
+@use "../../../../assets/scss/colors";
+@use "../../../../assets/scss/sizes";
+
+.container-extension {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.container-extension__layout {
+  display: flex;
+  overflow: hidden auto;
+  flex-direction: column;
+  box-shadow:
+    0 515px 145px 0 rgba(0, 0, 0, 0%),
+    0 329px 132px 0 rgba(0, 0, 0, 1%),
+    0 185px 111px 0 rgba(0, 0, 0, 5%),
+    0 83px 83px 0 rgba(0, 0, 0, 10%),
+    0 21px 45px 0 rgba(0, 0, 0, 10%);
+}
+
+.pin-extension__container {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pin-extension__frame {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pin-extension__link {
+  position: absolute;
+  border: none;
+  background: none;
+  color: colors.$midGray;
+  cursor: pointer;
+}
+
+.pin-extension__heading-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pin-extension__heading {
+  text-align: center;
+}
+
+.pin-extension__image {
+  border: 0.5px solid colors.$darkWhite;
+  border-radius: 5px;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .container-extension__layout {
+          width: sizes.calculate-size(440px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(750px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .pin-extension__container {
+          padding: 
+            sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier)
+            sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier)
+            sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .pin-extension__frame {
+          margin-top: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .pin-extension__link {
+          top: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          left: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          font-weight: sizes.calculate-size(700, $screen-multiplier, $custom-multiplier);
+        }
+
+        .pin-extension__heading {
+          width: sizes.calculate-size(270px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .pin-extension__image {
+          height: sizes.calculate-size(230px, $screen-multiplier, $custom-multiplier);
+          margin-top: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@use "../../assets/scss/sizes";
+
+.select {
+  font-size: 0.56rem;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .select {
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

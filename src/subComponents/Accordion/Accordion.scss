@@ -1,0 +1,111 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+
+.accordion--default {
+  width: 100%;
+  color: colors.$midGray;
+  font-weight: 400;
+  line-height: 1.33;
+}
+
+.accordion__body {
+  min-height: 13px;
+  border-radius: spacing.$border-radius;
+
+  &:hover {
+    background-color: colors.$midWhite;
+  }
+
+  &--open {
+    background-color: colors.$midWhite;
+  }
+
+  &--no-margin-bottom {
+    margin-bottom: 0 !important;
+  }
+}
+
+.accordion__heading {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.accordion__arrow {
+  position: absolute;
+  top: 0;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+.accordion__heading__title {
+  color: colors.$black;
+  font-weight: 590;
+}
+
+/**
+ * Screen size specific overrides
+ **/
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name,
+      $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .accordion--default {
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .accordion__body {
+          $padding-vertical: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          $padding-horizontal: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+
+          padding: $padding-vertical $padding-horizontal;
+          margin-bottom: sizes.calculate-size(15px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .accordion-body {
+          margin-top: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .accordion__heading__title {
+          font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .accordion__heading__title--with-icon {
+          margin-left: -(sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier));
+
+          svg {
+            margin-top: sizes.calculate-size(1px, $screen-multiplier, $custom-multiplier);
+            margin-right: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+            margin-bottom: sizes.calculate-size(-1px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .accordion__arrow {
+          right: -(sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier));
+          width: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          padding: 0 sizes.calculate-size(3px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .accordion__panel {
+          margin-top: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .accordion__panel--no-strapline {
+          margin-top: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

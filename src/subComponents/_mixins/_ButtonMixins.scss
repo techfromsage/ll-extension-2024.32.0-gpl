@@ -1,0 +1,158 @@
+@use "../../assets/scss/spacing";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+@mixin button($screen-multiplier, $custom-variance) {
+  width: sizes.calculate-size(320px, $screen-multiplier, $custom-variance);
+  max-width: 100%;
+  height: sizes.calculate-size(44px, $screen-multiplier, $custom-variance);
+  padding: 0 sizes.calculate-size(10px, $screen-multiplier, $custom-variance);
+  border-radius: spacing.$border-radius;
+  margin-bottom: sizes.calculate-size(16px, $screen-multiplier, $custom-variance);
+
+  @include button-font-size($screen-multiplier, $custom-variance);
+
+  &.button--half-width {
+    max-width: 50%;
+  }
+
+  &.button--no-margin {
+    margin: 0;
+  }
+
+  &.button--medium {
+    height: sizes.calculate-size(30px, $screen-multiplier, $custom-variance);
+    font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-variance);
+  }
+
+  &.button--small {
+    width: sizes.calculate-size(80px, $screen-multiplier, $custom-variance);
+    height: sizes.calculate-size(24px, $screen-multiplier, $custom-variance);
+    font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-variance);
+  }
+}
+
+@mixin close($screen-multiplier, $custom-variance) {
+  width: sizes.calculate-size(26px, $screen-multiplier, $custom-variance);
+  height: sizes.calculate-size(26px, $screen-multiplier, $custom-variance);
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background-color: transparent;
+  color: black;
+  cursor: pointer;
+  line-height: sizes.calculate-size(0.55, $screen-multiplier, $custom-variance);
+}
+
+@mixin close-before($screen-multiplier, $custom-variance) {
+  position: relative;
+  display: inline-block;
+  height: sizes.calculate-size(19px, $screen-multiplier, $custom-variance);
+  margin-bottom: sizes.calculate-size(5px, $screen-multiplier, $custom-variance);
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+@mixin hidden-button($screen-multiplier, $custom-variance) {
+  position: relative;
+  width: sizes.calculate-size(26px, $screen-multiplier, $custom-variance);
+  height: sizes.calculate-size(26px, $screen-multiplier, $custom-variance);
+  border: none;
+  background: none;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+@mixin navigation-button-hover {
+  border-radius: 999px;
+  background-color: colors.$midWhite;
+}
+
+@mixin button-as-link {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@mixin button-tertiary($screen-multiplier, $custom-variance) {
+  @include button-as-link;
+
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-decoration: none;
+
+  @include button-font-size($screen-multiplier, $custom-variance);
+}
+
+@mixin button-inline {
+  display: inline-flex;
+  width: auto;
+}
+
+@mixin button-as-link-secondary($screen-multiplier, $custom-variance) {
+  @include button-as-link;
+
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  color: colors.$lightCobalt;
+  font-size: sizes.calculate-size(13px, $screen-multiplier, $custom-variance);
+  font-weight: 600;
+  text-decoration: underline;
+
+  svg {
+    width: sizes.calculate-size(12px, $screen-multiplier, $custom-variance);
+    height: sizes.calculate-size(12px, $screen-multiplier, $custom-variance);
+    margin-left: sizes.calculate-size(4px, $screen-multiplier, $custom-variance);
+    fill: colors.$lightCobalt;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@mixin button-as-text {
+  padding: 0;
+  border: none;
+  background: none;
+  color: colors.$black;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@mixin button-neutral($screen-multiplier, $custom-variance) {
+  @include button($screen-multiplier, $custom-variance);
+
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-decoration: none;
+
+  @include button-font-size($screen-multiplier, $custom-variance);
+}
+
+@mixin button-undo($screen-multiplier, $custom-variance) {
+  @include button-as-link;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include button-font-size($screen-multiplier, $custom-variance);
+}
+
+@mixin button-font-size($screen-multiplier, $custom-multiplier) {
+  font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+  font-weight: 700;
+}

@@ -1,0 +1,62 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.slider__wrapper {
+  display: flex;
+  margin-bottom: 17px;
+}
+
+.slider__nav {
+  position: relative;
+  top: -3px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  &--next {
+    right: 0;
+  }
+
+  &--prev {
+    left: 0;
+  }
+}
+
+.slider__items {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  height: 21px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+.slider__slide {
+  position: absolute;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.5s;
+}
+
+.slide__text {
+  &--active {
+    padding-bottom: 2px;
+    border-bottom: 2px solid colors.$black;
+    color: colors.$black;
+    font-weight: 700;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .slider__wrapper {
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@use "../../assets/scss/spacing";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.card--default {
+  border-radius: spacing.$border-radius;
+  background: #fff;
+}
+
+.card--bordered {
+  border: 0.5px solid colors.$darkWhite;
+  margin-bottom: 12px;
+}
+
+.card--no-margin {
+  margin-bottom: 0;
+}
+
+.card--shadow {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 15%);
+}
+
+.card--small-shadow {
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 8%);
+}
+
+.card--annotation {
+  position: relative;
+}
+
+.card__annotation-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.card__title {
+  display: flex;
+  color: colors.$black;
+  font-weight: 600;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name,
+      $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .card--default {
+          padding: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .card--narrow {
+          padding: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .card--annotation {
+          padding-left: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .card__annotation-color {
+          width: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .card__title {
+          margin-bottom: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+
+          &__icon {
+            padding-top: sizes.calculate-size(3px, $screen-multiplier, $custom-multiplier);
+            margin-right: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+
+.label {
+  position: relative;
+  box-sizing: border-box;
+  background: colors.$lightGray;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+
+  &--success {
+    background: colors.$successLight;
+    color: colors.$successDark;
+  }
+
+  &--warning {
+    border-color: colors.$warningDark;
+    background: colors.$warning;
+    color: colors.$darkGray;
+  }
+
+  &--info {
+    background: colors.$infoLight;
+    color: colors.$darkGray;
+  }
+
+  &--error {
+    background: colors.$errorLight;
+    color: colors.$errorDark;
+  }
+
+  &--new-feature {
+    background: colors.$newFeatureMedium;
+    color: colors.$newFeatureDark;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $font-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$font-name} {
+        .label {
+          $padding-vertical: sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier);
+          $padding-horizontal: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+
+          padding: $padding-vertical $padding-horizontal;
+          border-radius: sizes.calculate-size(3px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

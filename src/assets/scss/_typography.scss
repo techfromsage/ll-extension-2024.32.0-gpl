@@ -1,0 +1,66 @@
+@use "sizes";
+@use "colors";
+@use "../../subComponents/_mixins/_ButtonMixins";
+
+ol {
+  padding-left: 20px;
+  list-style: decimal;
+}
+
+.list--unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.color--mid-gray {
+  color: colors.$midGray;
+}
+
+.text--right {
+    text-align: right;
+}
+
+.heading {
+  color: colors.$black;
+  font-weight: 700;
+}
+
+.body {
+  color: colors.$midGray;
+  font-weight: 400;
+}
+
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $font-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$font-name} {
+        .heading {
+          margin-bottom: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .body {
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(21px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .button {
+          @include ButtonMixins.button-font-size($screen-multiplier, $custom-multiplier);
+        }
+
+        .text-size--medium {
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .list--unstyled li {
+          margin-bottom: sizes.calculate-size(5px, $screen-multiplier, $custom-multiplier);
+        }
+
+      }
+    }
+  }
+}

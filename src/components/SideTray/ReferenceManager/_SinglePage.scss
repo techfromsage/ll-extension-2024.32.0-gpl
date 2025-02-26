@@ -1,0 +1,172 @@
+@use "../../../assets/scss/index";
+@use "../../../assets/scss/colors";
+@use "../../../assets/scss/sizes";
+
+.single-page-article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__title {
+    color: colors.$midGray;
+    font-weight: 500;
+  }
+
+  .checkbox__text {
+    color: colors.$black;
+    font-weight: 500;
+  }
+}
+
+.single-page-saved-article {
+  border: 1px solid colors.$lightGray;
+  border-radius: 5px;
+
+  &__title {
+    color: colors.$black;
+    font-weight: 600;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__header-left {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__header-right {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+
+  &__file-type {
+    display: flex;
+  }
+
+  &__details-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .single-page-article {
+          height: calc(100% - sizes.calculate-size(120px, $screen-multiplier, $custom-multiplier));
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .single-page-article-saved {
+          height: auto;
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .checkbox__text {
+          padding-right: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .single-page-saved-article {
+          padding:
+            sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier)
+            sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier)
+            0;
+          border-radius: 5px;
+          margin-bottom: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+
+          &__modal-button {
+            button {
+              margin-top: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+              margin-right: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__header {
+            margin-bottom: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+
+            &-left {
+              color: colors.$green;
+              font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+              gap: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+            }
+
+            &-right {
+              gap: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__file-type {
+            gap: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+
+            span {
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+              line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__title {
+            width: sizes.calculate-size(64px, $screen-multiplier, $custom-multiplier);
+            font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__details-wrapper {
+            margin: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier) 0;
+            gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+            .title {
+              width: sizes.calculate-size(64px, $screen-multiplier, $custom-multiplier);
+              font-weight: 600;
+            }
+
+            .text {
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__detail-item {
+            display: flex;
+            align-items: start;
+            gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+            .subtitle {
+              width: sizes.calculate-size(64px, $screen-multiplier, $custom-multiplier);
+              color: colors.$midGray;
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+              font-weight: 600;
+            }
+
+            .text {
+              width: 100%;
+              color: colors.$black;
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__buttons {
+            display: flex;
+            gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__modal-content {
+            padding:
+              sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier)
+              sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier)
+              sizes.calculate-size(0, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

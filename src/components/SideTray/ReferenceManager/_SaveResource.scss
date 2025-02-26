@@ -1,0 +1,69 @@
+@use "../../../assets/scss/index";
+@use "../../../assets/scss/sizes";
+
+.save-resource-search__search-wrapper {
+  display: flex;
+  width: 100%;
+  height: inherit;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.save-resource-search__search__digital-resources {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.search-page-saved-citation {
+  display: flex;
+
+  &__link {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .single-page-article-container,
+        .search-page__reference-list {
+          .heading {
+            margin-top: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+
+          hr {
+            $mt: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+            $mr: sizes.calculate-size(0, $screen-multiplier, $custom-multiplier);
+            $mb: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            $ml: sizes.calculate-size(0, $screen-multiplier, $custom-multiplier);
+
+            margin: $mt $mr $mb $ml;
+          }
+
+          p {
+            margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .save-resource-search__search-item {
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .save-resource-search__search__digital-resources {
+          gap: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .search-page-saved-citation {
+          gap: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+          &__link {
+            margin-top: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

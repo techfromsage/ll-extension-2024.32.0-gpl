@@ -1,0 +1,80 @@
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+
+.pills__wrapper {
+  margin-top: 8px;
+}
+
+.pill {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: spacing.$border-radius;
+  background: var(--primary-color);
+  box-shadow: 0 1px 3px rgba(20, 21, 22, 25%);
+  color: var(--primary-contrast-color);
+  fill: var(--primary-contrast-color);
+  font-weight: 700;
+}
+
+.pill--dragging {
+  background: var(--primary-dark-color);
+  cursor: grab;
+}
+
+.pill__drag-handler {
+  cursor: grab;
+  text-align: center;
+
+  // Slight adjustment needed when used within pill
+  .drag-handle {
+    margin-top: 1px;
+  }
+}
+
+.pill__drag-handler,
+.pill__close {
+  &:hover {
+    border-radius: spacing.$border-radius;
+    background: var(--primary-dark-color);
+  }
+
+  // Slight adjustment needed when used within pill
+  .close--small {
+    margin-top: 1px;
+  }
+}
+
+.pill__label {
+  color: inherit;
+  text-overflow: ellipsis;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .pill {
+          padding: 0 sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .pill__label {
+          margin: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier) 0;
+          text-wrap: balance;
+        }
+
+        .pill__close {
+          line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .pill__drag-handler {
+          width: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

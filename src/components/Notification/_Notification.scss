@@ -1,0 +1,162 @@
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/colors";
+
+.notification-sidetray__title {
+  color: colors.$black;
+  font-weight: 700;
+}
+
+.notification {
+  color: colors.$midGray;
+
+  &--sidetray {
+    width: 100%;
+    font-weight: 400;
+    line-height: 1.33;
+
+    .information-pip {
+      background-color: colors.$white;
+    }
+  }
+
+  &--popup {
+    width: 100%;
+
+    button,
+    a {
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  &--modal {
+    flex: 1 100%;
+  }
+
+  .information-pip {
+    margin-bottom: 8px;
+  }
+}
+
+.notification__header {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 8px;
+}
+
+.notification__image {
+  display: block;
+  padding: 0;
+  border: none;
+  margin: 0 0 8px;
+  background: transparent;
+  cursor: pointer;
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  &--empty {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: colors.$darkWhite;
+  }
+}
+
+.notification__iframe {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  &_wrapper {
+    position: relative;
+  }
+
+  &_loading {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.notification__buttons {
+  display: flex;
+  flex-wrap: wrap;
+
+  .button-primary,
+  .button-secondary {
+    flex: 1;
+  }
+}
+
+/**
+* Screen size specific overrides
+**/
+@each $size-name, $custom-multiplier in sizes.$custom-scale {
+  .#{$size-name} {
+    .notification__iframe {
+      transform: scale($custom-multiplier);
+    }
+  }
+}
+
+/**
+* Screen size specific overrides
+**/
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .notification__paragraph {
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .notification--sidetray {
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .notification__title--sidetray {
+          margin-right: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(13px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .notification--popup {
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          color: colors.$midGray;
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          font-weight: 400;
+          line-height: sizes.calculate-size(21px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .notification__title--popup {
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          color: colors.$black;
+          font-size: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+          font-weight: 700;
+          line-height: sizes.calculate-size(22px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .notification__body--popup,
+        .notification__body--sidetray {
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .notification-message {
+          margin-bottom: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .notification__buttons {
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

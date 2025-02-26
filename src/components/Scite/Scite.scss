@@ -1,0 +1,352 @@
+@use "../../assets/scss/sizes";
+
+/**
+ * Styles based upon official scite extension
+ */
+/* stylelint-disable */
+
+// CONTAINER AND CONTENT STYLES
+.ll-scite-container {
+  visibility: visible !important;
+  z-index: 2147483647;
+  z-index: 99999999999;
+  width: fit-content !important;
+
+  &--horizontal {
+    position: relative;
+  }
+
+  &--vertical {
+    position: fixed;
+  }
+}
+
+.ll-scite-content {
+  position: absolute;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s;
+
+  &--horizontal, &--vertical {
+    left: 100%;
+  }
+}
+
+.ll-scite-container:hover .ll-scite-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+// BADGE STYLES
+.ll-scite-badge {
+  display: flex;
+  width: fit-content !important;
+  box-sizing: border-box;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background-color: white;
+  color: #0e1d1a;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &:hover {
+    background: #f4f4f4;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:link,
+  &:visited {
+    color: inherit;
+  }
+
+  // OTHER BADGE STYLES
+  &--logo {
+    display: block;
+  }
+}
+
+// TOOLTIP STYLES
+.ll-scite-tooltip {
+  box-sizing: border-box;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 0 37px 0 rgb(0 0 0 / 5%);
+  text-decoration: none;
+
+  &--horizontal, &--vertical {
+    flex-direction: column;
+  }
+
+  &:link,
+  &:visited {
+    color: inherit;
+  }
+
+  // TOOLTIP ARROW STYLES
+  &::after {
+    content: "";
+    position: absolute;
+    background: white;
+    transform: rotate(45deg);
+    box-shadow: 0 0 37px 0 rgb(0 0 0 / 5%);
+  }
+
+  &--horizontal::after, &--vertical::after {
+    border-left: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  // OTHER TOOLTIP STYLES
+  &--logo {
+    display: block;
+  }
+
+  &--button {
+    display: inline-block;
+    width: fit-content;
+    background-color: #0062ff;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 200ms ease-in-out;
+
+    &:hover {
+      background-color: #009dff;
+    }
+  }
+
+  &--title {
+    a:link,
+    :active,
+    :visited {
+      color: black;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #828179;
+    }
+  }
+
+  &--description {
+    color: #828179;
+  }
+}
+
+// METRIC STYLES
+.ll-scite-metric {
+  &--horizontal {
+    display: flex;
+    border-left: 1px solid #cfcfcf;
+  }
+
+  &--vertical {
+    display: flex;
+  }
+
+  &.first {
+    border-left: none;
+  }
+}
+
+.ll-scite-metric__container {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ll-scite-metric-tooltip {
+  &--horizontal, &--vertical {
+    display: flex;
+  }
+
+  &.first {
+    border-left: none;
+  }
+}
+
+.ll-scite-metric__container-tooltip {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+}
+
+.ll-scite-metric__value-tooltip {
+  display: block;
+  font-weight: bold;
+  float: right;
+  text-align: right;
+}
+
+.ll-scite-metric__name-tooltip {
+  display: block;
+  width: 100%;
+  float: left;
+}
+
+.ll-scite-metric__icon {
+  font-family: scite-icons, sans-serif !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  font-weight: normal !important;
+  speak: none;
+  text-transform: none !important;
+
+  &--unclassified::before {
+    color: #828179;
+    content: "\e80a";
+  }
+
+  &--contradicting::before {
+    color: #0062ff;
+    content: "\e80a";
+  }
+
+  &--mentioning::before {
+    color: #393f43;
+    content: "\e902";
+  }
+
+  &--supporting::before {
+    color: #26a65b;
+    content: "\e903";
+  }
+
+  &--retractions::before {
+    color: #ff3b30;
+    content: "\e901";
+  }
+
+  &--notices::before {
+    color: #82807d;
+    content: "\e90a";
+  }
+
+  &--citingPublications::before {
+    color: #82807d;
+    content: "\e90b";
+  }
+
+  &--smallIcon {
+    line-height: 1rem !important;
+  }
+
+  &--openingArrow::before {
+    color: #82807d;
+    content: "\e922";
+  }
+
+  .ll-scite-closingCaret::before {
+    color: #82807d;
+    content: "\e925";
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .ll-scite-container {
+          &--vertical {
+            bottom: sizes.calculate-size(180px, $screen-multiplier, $custom-multiplier);
+            left: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+        .ll-scite-content {
+          &--horizontal {
+            top: sizes.calculate-size(-215px, $screen-multiplier, $custom-multiplier);
+          }
+          &--vertical {
+            top: sizes.calculate-size(-165px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+        .ll-scite-badge {
+          &--horizontal {
+            margin-top: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+          &--vertical {
+            padding:
+              sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier)
+              sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier)
+              sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier)
+              sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+          &--logo {
+            width: sizes.calculate-size(4em, $screen-multiplier, $custom-multiplier);
+            max-width: sizes.calculate-size(4em, $screen-multiplier, $custom-multiplier);
+            margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+        .ll-scite-tooltip {
+          width: sizes.calculate-size(260px, $screen-multiplier, $custom-multiplier);
+          min-width: sizes.calculate-size(260px, $screen-multiplier, $custom-multiplier);
+          min-height: sizes.calculate-size(445px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          padding: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          &--horizontal, &--vertical {
+            margin-left: sizes.calculate-size(17px, $screen-multiplier, $custom-multiplier);
+          }
+          &--horizontal::after, &--vertical::after {
+            top: sizes.calculate-size(222px, $screen-multiplier, $custom-multiplier);
+            left: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+            width: sizes.calculate-size(17px, $screen-multiplier, $custom-multiplier);
+            height: sizes.calculate-size(17px, $screen-multiplier, $custom-multiplier);
+          }
+          &--logo {
+            width: sizes.calculate-size(6em, $screen-multiplier, $custom-multiplier);
+            max-width: sizes.calculate-size(6em, $screen-multiplier, $custom-multiplier);
+            margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+          &--head {
+            padding-bottom: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+          }
+          &--button {
+            padding:
+              sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier)
+              sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            margin-top: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+            margin-bottom: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+          }
+          &--title {
+            margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+        .ll-scite-metric {
+          &--horizontal {
+            padding:
+              sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier)
+              sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+        .ll-scite-metric__value {
+          margin-left: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+        .ll-scite-metric__value-tooltip {
+          width: sizes.calculate-size(100px, $screen-multiplier, $custom-multiplier);
+        }
+        .ll-scite-metric__name-tooltip {
+          padding-left: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+        }
+        .ll-scite-metric__icon {
+          line-height: sizes.calculate-size(1.5, $screen-multiplier, $custom-multiplier) !important;
+          &--smallIcon {
+            line-height: sizes.calculate-size(1rem, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

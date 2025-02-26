@@ -1,0 +1,210 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.switch-text {
+  position: relative;
+  flex: 1;
+  color: colors.$midGray;
+  cursor: pointer;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: left;
+
+  &--highlighted {
+    color: colors.$white;
+  }
+
+  &--disabled {
+    background-color: colors.$darkWhite !important;
+    color: colors.$midGray;
+  }
+
+  &--bold {
+    font-weight: 500;
+  }
+}
+
+.slider {
+  position: absolute;
+  border-radius: 34px;
+  background-color: colors.$midGray;
+  cursor: pointer;
+  inset: 0;
+  transition: 0.4s;
+
+  &--disabled {
+    background-color: colors.$darkWhite !important;
+  }
+}
+
+.slider::before {
+  position: absolute;
+  border-radius: 50%;
+  background-color: colors.$white;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 13L18 17.5' stroke='%236E6E6E'/%3E%3Cpath d='M14 17.5L18 13' stroke='%236E6E6E'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  content: "";
+  transition: 0.4s;
+}
+
+.slider--checked {
+  background-color: colors.$green;
+
+  &::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.2403 15.7299L17.9245 13L19 14.1117L15.2384 18L13 15.6863L14.0612 14.511L15.2403 15.7299Z' fill='%2300A980'/%3E%3C/svg%3E%0A");
+  }
+
+  &.slider--pause-icon {
+    &::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.67748 6.66287C8.39264 5.92868 7.35107 6.54159 7.35107 7.99224V24.0081C7.35107 25.4765 8.40816 26.0628 9.67748 25.3375L23.6913 17.3295C24.9762 16.5953 24.9607 15.3961 23.6913 14.6708L9.67748 6.66287Z' fill='%2300A980'/%3E%3C/svg%3E%0A");
+    }
+  }
+}
+
+.slider--pause-icon::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.33325 7.99167C5.33325 6.52501 6.51459 5.33301 7.99725 5.33301H10.6693C12.1413 5.33301 13.3333 6.54101 13.3333 7.99167V24.0077C13.3333 25.4743 12.1519 26.6663 10.6693 26.6663H7.99725C6.52525 26.6663 5.33325 25.4583 5.33325 24.0077V7.99167ZM18.6666 7.99167C18.6666 6.52501 19.8479 5.33301 21.3306 5.33301H24.0026C25.4746 5.33301 26.6666 6.54101 26.6666 7.99167V24.0077C26.6666 25.4743 25.4853 26.6663 24.0026 26.6663H21.3306C19.8586 26.6663 18.6666 25.4583 18.6666 24.0077V7.99167Z' fill='%236E6E6E'/%3E%3C/svg%3E%0A");
+}
+
+.slider--disabled::before {
+  background-color: colors.$lightGray;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 14L18 18.5' stroke='%23EAEAEA'/%3E%3Cpath d='M14 18.5L18 14' stroke='%23EAEAEA'/%3E%3C/svg%3E%0A");
+}
+
+.slider--checked.slider--disabled::before {
+  background-color: colors.$lightGray;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.2403 15.7299L17.9245 13L19 14.1117L15.2384 18L13 15.6863L14.0612 14.511L15.2403 15.7299Z' fill='%23EAEAEA'/%3E%3C/svg%3E%0A");
+}
+
+.slider--hide-icon::before {
+  background-image: none !important;
+}
+
+.switch-label {
+  position: relative;
+  display: inline-flex;
+}
+
+.switch,
+.aside-switch {
+  position: relative;
+  cursor: pointer;
+}
+
+.switch input,
+.aside-switch input {
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 0;
+  opacity: 0;
+}
+
+.navigation {
+  .slider::before {
+    top: initial;
+  }
+}
+
+.switch-info-icon {
+  cursor: pointer;
+}
+
+.switch-tooltip {
+  position: absolute;
+  z-index: 100;
+  top: 16px;
+  width: 160px;
+  border: 1px solid colors.$midGray;
+  border-radius: 3px;
+  background: colors.$darkWhite;
+  color: colors.$black;
+  visibility: hidden;
+
+  &::after {
+    position: absolute;
+    top: -7px;
+    left: 30px;
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid colors.$midGray;
+    border-left: 1px solid colors.$midGray;
+    background: colors.$darkWhite;
+    border-top-left-radius: 3px;
+    content: "";
+    transform: rotate(45deg);
+  }
+}
+
+.switch-label:hover .switch-tooltip,
+.switch-label.focused .switch-tooltip {
+  visibility: visible;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .switch,
+        .aside-switch {
+          min-width: sizes.calculate-size(28px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          margin-right: sizes.calculate-size(11px, $screen-multiplier, $custom-multiplier); // Discuss removing this margin
+        }
+
+        .slider::before {
+          top: sizes.calculate-size(0.9px, $screen-multiplier, $custom-multiplier);
+          left: sizes.calculate-size(1.25px, $screen-multiplier, $custom-multiplier);
+          width: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          background-position-x: sizes.calculate-size(-10px, $screen-multiplier, $custom-multiplier);
+          background-position-y: sizes.calculate-size(-9.5px, $screen-multiplier, $custom-multiplier);
+          background-size: sizes.calculate-size(32px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .slider--pause-icon::before {
+          background-position-x: center;
+          background-position-y: center;
+          background-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .navigation {
+          .slider::before {
+            bottom: sizes.calculate-size(0.9px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .slider--checked::before {
+          transform: translateX(sizes.calculate-size(13.46px, $screen-multiplier, $custom-multiplier));
+        }
+
+        .switch-text {
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+
+          &--highlighted {
+            padding-right: sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier);
+            padding-left: sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier);
+            border-radius: sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .switch-info-icon {
+          margin-left: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .switch-tooltip {
+          $pt: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+          $pr: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          $pb: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+          $pl: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+
+          padding: $pt $pr $pb $pl;
+          margin-top: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

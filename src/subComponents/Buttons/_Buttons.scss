@@ -1,0 +1,188 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../_mixins/ButtonMixins";
+
+.button-primary,
+.button-secondary,
+.button-as-link,
+.button-neutral {
+  cursor: pointer;
+}
+
+%button-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button-primary {
+  @extend %button-overflow;
+
+  border-style: none;
+  background-color: var(--primary-color);
+  color: var(--primary-contrast-color);
+
+  &:hover {
+    background-color: var(--primary-dark-color);
+  }
+}
+
+.button-secondary {
+  @extend %button-overflow;
+
+  border: 0.5px solid var(--secondary-button-border-color);
+  background-color: colors.$white;
+  color: var(--secondary-button-color);
+
+  &:hover {
+    border-color: var(--secondary-button-border-color);
+    background-color: colors.$midWhite;
+    color: var(--secondary-button-color);
+  }
+}
+
+.button-undo {
+  @extend %button-overflow;
+
+  color: colors.$lightCobalt;
+
+  svg {
+    margin-right: 0;
+    fill: colors.$lightCobalt;
+  }
+}
+
+.button-tertiary {
+  @extend %button-overflow;
+
+  color: colors.$lightCobalt;
+
+  svg {
+    fill: colors.$lightCobalt;
+  }
+
+  &.button--disabled {
+    color: colors.$midGray;
+    cursor: initial;
+
+    svg {
+      fill: colors.$midGray;
+    }
+  }
+}
+
+.button-neutral {
+  @extend %button-overflow;
+
+  border: 0.5px solid colors.$lightGray;
+  background-color: colors.$white;
+  color: colors.$midGray;
+
+  &:hover {
+    background-color: colors.$midWhite;
+  }
+}
+
+.button-as-link {
+  color: colors.$cobalt;
+  font-weight: 400;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.button--disabled {
+  background-color: colors.$lightGray;
+  color: colors.$black;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: colors.$lightGray;
+    color: colors.$black;
+  }
+}
+
+.close--small {
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background-color: transparent;
+  color: black;
+  cursor: pointer;
+}
+
+.close {
+  position: relative;
+
+  &:hover {
+    background-color: colors.$midWhite;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .button-primary {
+          @include ButtonMixins.button($screen-multiplier, $custom-multiplier);
+        }
+
+        .button-secondary {
+          @include ButtonMixins.button($screen-multiplier, $custom-multiplier);
+        }
+
+        .button-as-link-secondary {
+          @include ButtonMixins.button-as-link-secondary($screen-multiplier, $custom-multiplier);
+        }
+
+        .button-as-link {
+          @include ButtonMixins.button-as-link;
+
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .button-tertiary {
+          @include ButtonMixins.button-tertiary($screen-multiplier, $custom-multiplier);
+
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .button-neutral {
+          @include ButtonMixins.button-neutral($screen-multiplier, $custom-multiplier);
+
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .button-inline {
+          @include ButtonMixins.button-inline;
+
+          margin-right: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+          margin-left: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .button-as-text {
+          @include ButtonMixins.button-as-text;
+        }
+
+        .button-undo {
+          @include ButtonMixins.button-undo($screen-multiplier, $custom-multiplier);
+
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          gap: sizes.calculate-size(3px, $screen-multiplier, $custom-multiplier);
+
+          svg {
+            width: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            height: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .button-small {
+          width: unset;
+          height: 24px;
+        }
+      }
+    }
+  }
+}

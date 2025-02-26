@@ -1,0 +1,63 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.action-panel {
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid colors.$lightGray;
+  background-color: colors.$offWhite;
+
+  &__header {
+    h5 {
+      svg {
+        margin-top: 1px;
+        margin-right: 6px;
+        margin-bottom: -1px;
+      }
+    }
+  }
+
+  .body {
+    color: colors.$black;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .action-panel {
+          padding: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+
+          &__header {
+            margin-bottom: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__footer {
+            margin-top: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          }
+
+          .select {
+            font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          }
+
+          .button-primary {
+            max-width: 120px;
+          }
+
+          .button--disabled {
+            max-width: 120px;
+            background: colors.$green;
+            color: colors.$offWhite;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+}

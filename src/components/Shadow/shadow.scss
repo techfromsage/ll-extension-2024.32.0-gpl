@@ -1,0 +1,30 @@
+@use "../../assets/scss/index";
+@use "../../subComponents/index" as index2;
+@use "../Layout/Layout";
+@use "../FloatingAction/FloatingAction";
+@use "../Notification/Notification";
+@use "../App/AppOff";
+@use "../Citation/Citation";
+@use "../SideTray/ReferenceManager/ReferenceManager";
+@use "../SideTray/ReferenceManager/HighlightAndAnnotate/HighlightAndAnnotate";
+@use "../SideTray/ReferenceManager/SaveResource";
+@use "../SideTray/Onboarding/PinExtension/PinExtensionTab";
+@use "../SideTray/Onboarding/SciwheelOnboardingTab/SciwheelOnboardingTab";
+@use "../ColorPalette/ColorPalette";
+@use "../InputCard/InputCard";
+@use "../Annotation/Annotation";
+@use "../SideTray/ReferenceManager/SearchPage";
+@use "../SideTray/ReferenceManager/SinglePage";
+@use "../BookmarkCheckbox/BookmarkCheckbox";
+
+/* stylelint-disable-next-line selector-id-pattern */
+#shadow,
+.layout__wrapper {
+  display: block !important;
+  transition: all 0s !important;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+#LLFloatingAction {
+  visibility: visible !important;
+}

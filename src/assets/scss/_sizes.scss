@@ -1,0 +1,27 @@
+@function calculate-size($defaultSize, $screen-multiplier, $custom-multiplier) {
+  $result: calc(($defaultSize + ($defaultSize * $screen-multiplier) + ($defaultSize * $custom-multiplier)));
+
+  @return $result;
+}
+
+$custom-scale: (
+  "extra-small": 0.9,
+  "small": 0.95,
+  "medium": 1.0,
+  "large": 1.05,
+  "extra-large": 1.1
+);
+
+$custom-variance: (
+  "extra-small": -0.2,
+  "small": -0.1,
+  "medium": 0,
+  "large": 0.1,
+  "extra-large": 0.2
+);
+
+$screen-variance: (
+  "small-screen": -0.1,
+  "medium-screen": 0,
+  "large-screen": 0.1
+);

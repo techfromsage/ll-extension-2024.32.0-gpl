@@ -1,0 +1,47 @@
+@use "../../../assets/scss/index";
+@use "../../../assets/scss/colors";
+@use "../../../assets/scss/sizes";
+
+.reference-manager__video {
+  width: 100%;
+}
+
+.reference-manager--no-user {
+  .action__wrapper {
+    .button-primary {
+      min-width: 100%;
+    }
+  }
+}
+
+.reference-manager--not-supported__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .reference-manager--no-user {
+          padding-top: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+
+          .action__wrapper {
+            margin-top: sizes.calculate-size(40px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .reference-manager--not-supported__actions {
+          margin-top: sizes.calculate-size(26px, $screen-multiplier, $custom-multiplier);
+
+          .button-primary,
+          .button-secondary {
+            width: sizes.calculate-size(296px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

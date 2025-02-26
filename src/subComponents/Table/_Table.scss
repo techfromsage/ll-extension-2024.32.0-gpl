@@ -1,0 +1,72 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../_mixins/ButtonMixins";
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .table {
+          width: 100%;
+          width: fill-available;
+          width: -moz-fill-available;
+          padding-top: sizes.calculate-size(7px, $screen-multiplier, $custom-multiplier);
+          margin-top: sizes.calculate-size(1px, $screen-multiplier, $custom-multiplier);
+          margin-right: sizes.calculate-size(9px, $screen-multiplier, $custom-multiplier);
+          margin-left: sizes.calculate-size(9px, $screen-multiplier, $custom-multiplier);
+          border-collapse: collapse;
+        }
+
+        .table__caption {
+          padding-bottom: sizes.calculate-size(9px, $screen-multiplier, $custom-multiplier);
+          color: colors.$black;
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          font-weight: 700;
+          letter-spacing: 0;
+          line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          text-align: left;
+        }
+
+        .table__body,
+        .table__header {
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          font-weight: 274;
+          letter-spacing: 0;
+          line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          text-align: left;
+        }
+
+        .table__body .table__row {
+          border-top: 0.5px solid colors.$midWhite;
+        }
+
+        .table__cell {
+          padding-top: sizes.calculate-size(5px, $screen-multiplier, $custom-multiplier);
+          padding-bottom: sizes.calculate-size(5px, $screen-multiplier, $custom-multiplier);
+          border: none;
+        }
+
+        .table_close {
+          @include ButtonMixins.close($screen-multiplier, $custom-multiplier);
+
+          top: sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier);
+          width: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .table_close:hover {
+          background-color: colors.$midWhite;
+        }
+
+        .table_close-before {
+          @include ButtonMixins.close-before($screen-multiplier, $custom-multiplier);
+
+          top: sizes.calculate-size(2.5px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: 0;
+          font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          font-weight: 200;
+        }
+      }
+    }
+  }
+}

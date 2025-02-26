@@ -1,0 +1,75 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/spacing";
+
+.banner {
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid colors.$darkGray;
+  border-radius: spacing.$border-radius;
+  background: colors.$lightGray;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title,
+  &__message {
+    font-weight: 700;
+  }
+
+  &__title {
+    color: colors.$darkGray;
+  }
+
+  &__message {
+    color: colors.$midGray;
+  }
+
+  &--success {
+    border-color: colors.$success;
+    background: colors.$successLight;
+  }
+
+  &--warning {
+    border-color: colors.$warningDark;
+    background: colors.$warning;
+    color: colors.$darkGray;
+  }
+
+  &--info {
+    border-color: colors.$lightGray;
+    background: colors.$infoLight;
+  }
+
+  &--error {
+    border-color: colors.$error;
+    background: colors.$errorLight;
+  }
+
+  &--new-feature {
+    border-color: colors.$newFeature;
+    background: colors.$newFeatureLight;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $font-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$font-name} {
+        .banner {
+          padding: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          margin-top: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+          &__title,
+          &__message {
+            font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,184 @@
+@use "../../../../assets/scss/index";
+@use "../../../../assets/scss/colors";
+@use "../../../../assets/scss/sizes";
+
+.dropdown-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  &__toggle {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid colors.$lightGray;
+    border-radius: 6px;
+    background-color: colors.$white;
+    color: colors.$midGray;
+    cursor: pointer;
+    text-align: left;
+
+    &:hover {
+      border-radius: 6px;
+    }
+
+    img {
+      position: absolute;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    z-index: 1000;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid colors.$lightGray;
+    border-radius: 6px;
+    margin-bottom: 1px;
+    background-color: colors.$white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 20%);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: colors.$lightGray;
+    }
+
+    &__group-label {
+      display: flex;
+      flex-direction: column;
+      background-color: colors.$white;
+      color: colors.$midGray;
+    }
+
+    &__options-group {
+      font-size: 10px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    &__item {
+      cursor: pointer;
+      font-weight: 500;
+
+      &:hover {
+        border-radius: 6px;
+        background-color: colors.$lightCobalt;
+        color: colors.$white;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.create-option {
+  position: sticky;
+  z-index: 900;
+  bottom: 0;
+  border-top: 0.5px solid colors.$lightGray;
+  background-color: colors.$white;
+  color: colors.$lightCobalt;
+  cursor: pointer;
+  font-weight: 600;
+
+  &:focus {
+    border-color: colors.$lightCobalt;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: colors.$white;
+
+    input {
+      flex: 1;
+      border: 2px solid colors.$lightCobalt;
+      border-radius: 4px;
+      outline: none;
+
+      &::placeholder {
+        font-style: italic;
+      }
+
+      &:focus {
+        border: 2px solid colors.$lightCobalt;
+      }
+    }
+
+    button {
+      &:last-child {
+        position: absolute;
+      }
+    }
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .dropdown-container {
+          font-size: sizes.calculate-size(13px, $screen-multiplier, $custom-multiplier);
+
+          &__toggle {
+            padding: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+
+            img {
+              right: sizes.calculate-size(15px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__menu {
+            max-height: sizes.calculate-size(200px, $screen-multiplier, $custom-multiplier);
+            padding-right: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            padding-left: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+            &__group-label {
+              padding: sizes.calculate-size(5px, $screen-multiplier, $custom-multiplier);
+            }
+
+            &__item {
+              padding: sizes.calculate-size(5px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+        }
+
+        .create-option {
+          padding-top: sizes.calculate-size(15px, $screen-multiplier, $custom-multiplier);
+          padding-bottom: sizes.calculate-size(15px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+          &__input-wrapper {
+            input {
+              height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+              padding: sizes.calculate-size(5px, $screen-multiplier, $custom-multiplier);
+              margin-right: sizes.calculate-size(5px, $screen-multiplier, $custom-multiplier);
+
+              &::placeholder {
+                font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+              }
+            }
+
+            button {
+              &:last-child {
+                right: sizes.calculate-size(80px, $screen-multiplier, $custom-multiplier);
+                font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

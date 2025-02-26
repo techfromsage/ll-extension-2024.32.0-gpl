@@ -1,0 +1,98 @@
+@use "../../../assets/scss/index";
+@use "../../../assets/scss/colors";
+@use "../../../assets/scss/sizes";
+
+.search-page {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__info {
+    color: colors.$midGray;
+    font-weight: 500;
+  }
+
+  &__resources {
+    box-sizing: border-box;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+}
+
+.search-page-saved-citation {
+  display: flex;
+
+  &__resources {
+    overflow-y: scroll;
+  }
+
+  &__link {
+    text-align: right;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__text {
+    color: colors.$black;
+  }
+}
+
+.search-page__reference-list {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .search-page {
+          flex-grow: 1;
+
+          &__info {
+            margin-bottom: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__resources {
+            padding-right: sizes.calculate-size(9px , $screen-multiplier, $custom-multiplier);
+            margin-bottom: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+            gap: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+
+            &::-webkit-scrollbar {
+              width: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+            }
+          
+            &::-webkit-scrollbar-thumb {
+              border-radius: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+              background: colors.$lightGray;
+            }
+          }
+        }
+
+        .search-page-saved-citation {
+          gap: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+          &__link {
+            margin-top: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__text {
+            font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        hr {
+          border-style: none;
+          border-top: 0.5px solid colors.$lightGray;
+        }
+      }
+    }
+  }
+}

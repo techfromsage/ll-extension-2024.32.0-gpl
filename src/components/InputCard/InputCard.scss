@@ -1,0 +1,62 @@
+@use "../../assets/scss/index";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.input-card {
+  display: flex;
+  flex-direction: column;
+
+  textarea {
+    border: 0.5px solid colors.$lightGray;
+    border-radius: 4px;
+    background: colors.$offWhite;
+    caret-color: colors.$lightCobalt;
+    outline: 2px solid transparent;
+    resize: none;
+
+    &:focus {
+      border-color: colors.$lightCobalt;
+      outline-color: rgba(colors.$lightCobalt, 0.3);
+    }
+
+    &::placeholder {
+      color: colors.$midGray;
+      font-style: italic;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .input-card-wrapper {
+          width: sizes.calculate-size(337px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .input-card {
+          gap: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+
+          textarea {
+            min-height: sizes.calculate-size(56px, $screen-multiplier, $custom-multiplier);
+            padding: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+            &::placeholder {
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+              line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__buttons {
+            gap: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

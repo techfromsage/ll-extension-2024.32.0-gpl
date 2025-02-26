@@ -1,0 +1,74 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.form-element--no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.form-element--select {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-element__title {
+  display: block;
+  color: colors.$black;
+  font-weight: 700;
+}
+
+.form-element__item--switch {
+  width: 100%;
+}
+
+.form-element__item--switch-table {
+  width: 100%;
+}
+
+.form-element__extra {
+  flex: 1;
+  margin-left: 11px;
+  text-align: right;
+}
+
+.form-element__alert {
+  flex: 1 100%;
+}
+
+form {
+  .form-element {
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+/**
+ * Screen size specific overrides
+ **/
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .form__help-text {
+          margin-bottom: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .form-element {
+          margin-bottom: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .form-element__title {
+          margin-right: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          margin-bottom: sizes.calculate-size(9px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(13px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .form-element__extra {
+          margin-left: sizes.calculate-size(11px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

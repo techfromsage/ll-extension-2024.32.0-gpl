@@ -1,0 +1,19 @@
+@use "../../assets/scss/colors";
+
+.toc-alert-link {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 4px;
+  color: colors.$googleBlue;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:visited {
+    color: colors.$googlePurple;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,183 @@
+@use "../../assets/scss/spacing";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/colors";
+@use "../_mixins/ButtonMixins";
+
+@mixin sidetray-heading($screen-multiplier, $custom-variance) {
+  display: inline-block;
+  font-size: sizes.calculate-size(13px, $screen-multiplier, $custom-variance);
+  font-weight: 590;
+  line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-variance);
+}
+
+@mixin sidetray-non-button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #c8c8c8;
+  cursor: pointer;
+}
+
+.navigation {
+  .button-icon {
+    margin-top: 3px;
+    margin-left: -1px;
+  }
+
+  .close {
+    svg {
+      margin-top: 1px;
+      margin-left: 0;
+    }
+  }
+
+  &--modal {
+    flex: 1;
+  }
+}
+
+.navigation__list {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: flex-end;
+  padding-left: 0;
+  margin: 0;
+  fill: colors.$black;
+  gap: 4px;
+  list-style-type: none;
+}
+
+.navigation__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+
+  &--active {
+    &::after {
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      width: 6px;
+      height: 2px;
+      border-radius: 2px;
+      background-color: colors.$black;
+      content: "";
+      transform: translateX(-50%);
+    }
+  }
+
+  &--dot {
+    &::before {
+      position: absolute;
+      z-index: 1;
+      top: 6px;
+      right: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: colors.$cobalt;
+      content: "";
+    }
+  }
+}
+
+label[for="navigation_switch"] {
+  flex-direction: row-reverse;
+
+  .switch {
+    margin-right: 3px;
+    margin-left: 6px;
+  }
+
+  .switch-text {
+    opacity: 0;
+  }
+
+  &:hover,
+  &:focus,
+  &.focused {
+    .switch-text {
+      opacity: 1;
+    }
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .settings:hover,
+        .minimise:hover,
+        .notifications:hover,
+        .close:hover,
+        .newtab:hover,
+        .referenceManager:hover {
+          @include ButtonMixins.navigation-button-hover;
+        }
+
+        .navigation {
+          .switch-label {
+            top: sizes.calculate-size(1.5px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+
+        .close {
+          @include ButtonMixins.close($screen-multiplier, $custom-multiplier);
+        }
+
+        .close--small {
+          width: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .settings,
+        .minimise,
+        .notifications,
+        .referenceManager,
+        .newtab {
+          @include ButtonMixins.hidden-button($screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}
+
+// manual adjustment for switch
+.small-screen {
+  .medium {
+    .navigation {
+      .switch-label {
+        top: 0;
+      }
+    }
+  }
+}
+
+.sidetray-wrapper {
+  flex: auto;
+  padding-left: 0;
+}
+
+@keyframes progress {
+  0% {
+    width: 102%;
+  }
+
+  // 99% {
+
+  // }
+  100% {
+    width: 0%;
+  }
+}
+
+.progress-bar {
+  position: relative;
+  left: -0.5em;
+  width: calc(100% + 1em);
+  min-height: 4px;
+  animation-name: progress;
+  animation-timing-function: linear;
+  background: colors.$lightGray;
+}

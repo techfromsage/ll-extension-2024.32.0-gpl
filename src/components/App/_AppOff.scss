@@ -1,0 +1,75 @@
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/colors";
+
+.app-off {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__image {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      color: colors.$black;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: 0;
+      color: colors.$midGray;
+    }
+  }
+}
+
+.loading-spinner {
+  height: 100%;
+
+  &--overlay {
+    position: absolute;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 90%);
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .highlight-and-annotate-wrapper {
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .app-off {
+          $padding-vertical: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+
+          padding: $padding-vertical 0;
+          gap: sizes.calculate-size(36px, $screen-multiplier, $custom-multiplier);
+
+          &__content {
+            gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+            h3 {
+              font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+              line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+            }
+
+            p {
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+              line-height: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+        }
+      }
+    }
+  }
+}

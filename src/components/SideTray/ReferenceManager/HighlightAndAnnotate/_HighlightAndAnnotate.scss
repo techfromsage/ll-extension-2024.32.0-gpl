@@ -1,0 +1,102 @@
+@use "../../../../assets/scss/index";
+@use "../../../../assets/scss/colors";
+@use "../../../../assets/scss/sizes";
+
+.highlight-and-annotate-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.highlight-and-annotate {
+  display: flex;
+  flex-direction: column;
+
+  &--empty {
+    align-items: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    &__date_author {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: colors.$lightMidGray;
+      font-style: italic;
+    }
+
+    &__quote {
+      width: fit-content;
+      height: fit-content;
+      cursor: pointer;
+    }
+
+    &--empty {
+      h3 {
+        color: colors.$black;
+        font-weight: 600;
+      }
+
+      p {
+        margin-bottom: 0;
+        color: colors.$midGray;
+      }
+    }
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .highlight-and-annotate-wrapper {
+          gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .highlight-and-annotate {
+          $padding-vertical: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+
+          padding: $padding-vertical 0;
+
+          &--empty {
+            gap: sizes.calculate-size(36px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__content {
+            gap: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+            &__date_author {
+              font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            }
+
+            &__quote {
+              padding: sizes.calculate-size(3px, $screen-multiplier, $custom-multiplier);
+              border-radius: sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier);
+            }
+
+            p {
+              padding-left: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+            }
+
+            &--empty {
+              width: sizes.calculate-size(237px, $screen-multiplier, $custom-multiplier);
+
+              h3 {
+                font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+                line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+              }
+
+              p {
+                font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+                line-height: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

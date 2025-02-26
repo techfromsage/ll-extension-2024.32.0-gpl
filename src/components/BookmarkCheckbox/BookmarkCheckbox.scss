@@ -1,0 +1,41 @@
+@use "../../assets/scss/index";
+@use "../../assets/scss/sizes";
+
+.bookmark__checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .bookmark__checkbox {
+          margin-bottom: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          font-size: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .icon {
+          svg {
+            width: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            margin-right: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+          }
+
+          font-size: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

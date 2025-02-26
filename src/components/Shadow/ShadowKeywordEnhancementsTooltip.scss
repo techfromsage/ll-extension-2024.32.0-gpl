@@ -1,0 +1,135 @@
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.tooltip {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background: colors.$white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 25%);
+  cursor: initial;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+
+  &__header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+  }
+
+  &__package-name {
+    color: colors.$black;
+  }
+
+  &__title {
+    color: colors.$black;
+    font-weight: 700;
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+  &__description {
+    color: colors.$black;
+    font-weight: 400;
+    text-wrap: wrap;
+  }
+
+  &__link {
+    a {
+      display: flex;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+      border-radius: 5px;
+      background: var(--primary-color);
+      color: var(--primary-contrast-color) !important;
+      font-weight: 700;
+      outline-color: transparent;
+      text-decoration: none;
+
+      &:focus {
+        outline-color: var(--primary-dark-color);
+      }
+
+      &:hover {
+        background: var(--primary-dark-color);
+      }
+    }
+  }
+
+  button {
+    all: unset;
+    position: absolute;
+    cursor: pointer;
+    line-height: 0px;
+    outline: 2px solid transparent;
+
+    &:focus {
+      outline-color: colors.$black;
+    }
+
+    .hidden-text {
+      position: absolute;
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      clip: rect(1px, 1px, 1px, 1px);
+      clip-path: inset(50%);
+    }
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+
+      .#{$size-name} {
+        .tooltip {
+          width: sizes.calculate-size(220px, $screen-multiplier, $custom-multiplier);
+          padding: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+
+          &__header {
+            margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+
+            img {
+              max-width: sizes.calculate-size(190px, $screen-multiplier, $custom-multiplier);
+              max-height: sizes.calculate-size(60px, $screen-multiplier, $custom-multiplier);
+            }
+          }
+
+          &__package-name {
+            margin-bottom: sizes.calculate-size(2px, $screen-multiplier, $custom-multiplier);
+            font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__title {
+            margin-bottom: sizes.calculate-size(4px, $screen-multiplier, $custom-multiplier);
+            font-size: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__description {
+            margin-bottom: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+            line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__link a {
+            font-size: sizes.calculate-size(14px, $screen-multiplier, $custom-multiplier);
+            line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          }
+
+          button {
+            top: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            right: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+            padding: sizes.calculate-size(3px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}

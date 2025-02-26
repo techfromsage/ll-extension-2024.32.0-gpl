@@ -1,0 +1,37 @@
+/**
+ * Toolbar events.
+ */
+import ToolbarMethods from '@/interfaces/browser/ToolbarMethods';
+
+const toolbar: ToolbarMethods = {
+  background: {
+    setPopup: details => {
+      return browser.action.setPopup(details);
+    },
+    activeIcon: (tabId, isDotOnly) => {
+      const name = isDotOnly ? 'icon-dot' : 'icon';
+      return browser.action.setIcon({
+        tabId,
+        path: {
+          16: `icons/active/${name}-16.png`,
+          32: `icons/active/${name}-32.png`,
+          192: `icons/active/${name}-192.png`,
+        },
+      });
+    },
+    badgeLabel: (tabId, text) => {
+      browser.action.setBadgeBackgroundColor({ color: '#3B55AF' }); // cobalt
+      browser.action.setBadgeText({
+        tabId,
+        text,
+      });
+    },
+    listeners: {
+      onClicked: (callback): void => {
+        browser.action.onClicked.addListener(tab => callback(tab.id || 0));
+      },
+    },
+  },
+};
+
+export default toolbar;

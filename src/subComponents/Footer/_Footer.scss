@@ -1,0 +1,47 @@
+@use "../../assets/scss/spacing";
+@use "../../assets/scss/sizes";
+@use "../../assets/scss/colors";
+
+@mixin footer($screen-multiplier, $custom-multiplier) {
+  margin-right: sizes.calculate-size(spacing.$space-large, $screen-multiplier, $custom-multiplier);
+  margin-left: sizes.calculate-size(spacing.$space-large, $screen-multiplier, $custom-multiplier);
+  text-align: center;
+}
+
+.footer--links {
+  display: flex;
+
+  a {
+    margin-right: 10px;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .footer {
+          color: colors.$midGray;
+          font-size: sizes.calculate-size(12px, $screen-multiplier, $custom-multiplier);
+          font-weight: normal;
+          line-height: sizes.calculate-size(15px, $screen-multiplier, $custom-multiplier);
+
+          @include footer($screen-multiplier, $custom-multiplier);
+        }
+
+        .footer--popup {
+          margin-bottom: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+        }
+
+        .footer--referenceManager {
+          display: flex;
+          flex-direction: start;
+        }
+
+        .footer--sidetray {
+          margin-bottom: sizes.calculate-size(18px, $screen-multiplier, $custom-multiplier);
+        }
+      }
+    }
+  }
+}

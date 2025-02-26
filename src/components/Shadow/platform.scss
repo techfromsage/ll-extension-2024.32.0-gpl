@@ -1,0 +1,19 @@
+// When dealing with slower SPA and strangely styled SPAs the extension renders first and
+// pushes the entire page content down. Fixing the LL extension to be fixed to the top of
+// the page allows it to float freely.
+/* stylelint-disable */
+#shadowLL, #LLKeywordEnhancementsContainer, #LLHighlightAndAnnotateContainer {
+  display: block !important;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2147483647;
+  z-index: 99999999999;
+}
+
+// Websites whose language reads from right to left override the direction of the LL extension.
+// This forces it back for the extension only.
+#shadowLL {
+  direction: ltr;
+}
+/* stylelint-enable */

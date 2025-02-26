@@ -1,0 +1,26 @@
+.spinner {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+/**
+ * At time of writing, keyframes from 'react-spinners' are not brought into Shadow Dom
+ * and requires us to define them ourselves. If this ever changes, we should remove.
+ */
+/* stylelint-disable-next-line keyframes-name-pattern */
+@keyframes react-spinners-BounceLoader-bounce {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}

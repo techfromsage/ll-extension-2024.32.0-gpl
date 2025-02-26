@@ -1,0 +1,32 @@
+import SciwheelIdType from '@/enums/sciwheel/SciwheelIdType';
+import SciwheelReferenceType from '@/enums/sciwheel/SciwheelReferenceType';
+
+export interface SciwheelLibraryItem {
+  applicationNumber?: string,
+  articleAbstract?: string,
+  assignees?: string[],
+  authors?: string[],
+  date?: string,
+  edition?: string,
+  editors?: string[],
+  fillingDate?: string,
+  id: string,
+  isbn?: string,
+  issn?: string,
+  issue?: string,
+  issuingAuthority?: string,
+  journal?: string,
+  keywords?: string,
+  matchType?: 'LOWER_BODY',
+  pageTitle: string,
+  pages?: string,
+  patentNumber?: string,
+  priorityNumber?: string,
+  publicationPlace?: string,
+  publisher?: string,
+  referenceType?: SciwheelReferenceType,
+  referrer?: string,
+  type: SciwheelIdType,
+  uri: string,
+  volume?: string,
+}

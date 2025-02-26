@@ -1,0 +1,99 @@
+@use "../../assets/scss/index";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/sizes";
+
+.citation__select-group:nth-of-type(2)::before {
+  display: block;
+  width: 94%;
+  border-top: 1px solid colors.$lightGray;
+  margin: 0 auto;
+  content: "";
+}
+
+.citation__select-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 3px;
+  font-weight: 500;
+
+  &__style {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__recent {
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+  &__tooltip {
+    position: absolute;
+    z-index: 100;
+    top: 16px;
+    max-width: 100%;
+    border: 1px solid colors.$midGray;
+    border-radius: 3px;
+    background: colors.$darkWhite;
+    color: colors.$black;
+    visibility: hidden;
+
+    &::after {
+      position: absolute;
+      top: -7px;
+      left: 30px;
+      width: 12px;
+      height: 12px;
+      border-top: 1px solid colors.$midGray;
+      border-left: 1px solid colors.$midGray;
+      background: colors.$darkWhite;
+      border-top-left-radius: 3px;
+      content: "";
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover &__tooltip,
+  &.focused &__tooltip {
+    transition-delay: 0.5s;
+    visibility: visible;
+  }
+}
+
+@each $screen, $screen-multiplier in sizes.$screen-variance {
+  .#{$screen} {
+    @each $size-name, $custom-multiplier in sizes.$custom-variance {
+      .#{$size-name} {
+        .citation__select-option {
+          gap: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          line-height: sizes.calculate-size(20px, $screen-multiplier, $custom-multiplier);
+
+          &__style {
+            height: sizes.calculate-size(24px, $screen-multiplier, $custom-multiplier);
+            font-size: sizes.calculate-size(13px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__recent {
+            font-size: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+            letter-spacing: sizes.calculate-size(-0.25px, $screen-multiplier, $custom-multiplier);
+          }
+
+          &__tooltip {
+            $pt: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+            $pr: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+            $pb: sizes.calculate-size(6px, $screen-multiplier, $custom-multiplier);
+            $pl: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+
+            padding: $pt $pr $pb $pl;
+            margin-top: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+            margin-bottom: sizes.calculate-size(8px, $screen-multiplier, $custom-multiplier);
+            font-size: sizes.calculate-size(10px, $screen-multiplier, $custom-multiplier);
+            line-height: sizes.calculate-size(16px, $screen-multiplier, $custom-multiplier);
+          }
+        }
+      }
+    }
+  }
+}
