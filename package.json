@@ -3,7 +3,7 @@
   "version": "2.0.1",
   "description": "LL's browser extension code and bundling",
   "private": true,
-  "license": "unlicensed",
+  "license": "GPL-3.0-only",
   "scripts": {
     "build": "node webpack/production/build.js",
     "start": "node webpack/development/webserver.js",
@@ -12,7 +12,6 @@
     "start:opera": "opera --new-window --load-extension=./build/ --user-data-dir=\"/tmp/${RANDOM}\"",
     "start:edge": "edge --new-window --load-extension=./build/ --user-data-dir=\"/tmp/${RANDOM}\"",
     "start:firefox": "web-ext run --source-dir ./build-browser/",
-    "tags": "git tag --sort=v:refname --format '%(refname:strip=2)' | tail -n 20"
   },
   "browserslist": "defaults",
   "dependencies": {
