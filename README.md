@@ -11,7 +11,15 @@
 - [TypeScript 4](https://www.typescriptlang.org/)
 
 ## 💻 Local development setup
-For usage please refer to the [Getting Started](/#getting-started-with-local-development) section in the repo's project root and then return here.
+1. Clone the repository
+2. Install dependencies
+   ```
+   $ npm install
+   ```
+3. Start the development server
+    ```
+   $ npm run start
+   ```
 
 You can Load your extension as follows:
    1. Access
